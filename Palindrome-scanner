@@ -1,0 +1,14 @@
+print("Enter a value to find out if it is a palindrome:")
+def main():
+    # Get the value from user
+    value = input()  
+    print(palindrome(value)) 
+def palindrome(value):
+
+    #Processes the Value
+    if value == value[::-1]:  
+        return f"{value} is a palindrome" 
+    else:
+        return f"{value} is not a palindrome" 
+
+main()  

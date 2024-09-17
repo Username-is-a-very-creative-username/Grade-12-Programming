@@ -1,0 +1,13 @@
+while True:
+  try:
+    number = int(input("Enter a number: "))
+    break  
+  except ValueError:
+    print("THATS NOT A NUMBER")
+def factorial(x):
+  result = 1  
+  for y in range(1, x + 1):  
+     result *= y 
+  return result  
+
+print("This Numbers Factorial is", factorial(number))

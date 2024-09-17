@@ -1,5 +1,5 @@
-number = int(input("Enter a number: "))
-if number % 2 == 0:
-  print(f"{number} is even.")
-else:
-  print(f"{number} is odd.")
+number = int(input("Enter a number: ")) #Informs the user to print a number
+if number % 2 == 0: #Checks the users value if it is even
+  print(f"{number} is even.") #If Value is even, informs the user
+else: 
+  print(f"{number} is odd.") #If Value is Not even, informs the user

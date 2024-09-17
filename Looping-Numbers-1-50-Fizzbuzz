@@ -1,0 +1,10 @@
+for num in range(1, 51): #Loops numbers between 1-50
+    output = ""  # Allows input for the user
+    if num % 3 == 0:  # Checks if it is divisible by 3
+        output += "Fizz"  # Add "Fizz" to the output string
+    if num % 5 == 0:  # Checks if it is divisible by 5
+        output += "Buzz"  # Add "Buzz" to the output string
+    if output:  
+        print(output)  # Print "Fizz", "Buzz", or "FizzBuzz"
+    else: #Prints either the "names" or original numbers
+        print(num)  # Prints numbers that cannot be divided

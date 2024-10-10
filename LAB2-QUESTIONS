@@ -1,0 +1,61 @@
+#NOTE: IF YOU WANT TO RUN EACH CODE INDEPENDENTLY REMOVE THE TAG FROM EACH PROGRAM AT A TIME
+#1. swap 2 Numbers
+#print("Enter 2 NUMBERS 2 SWAP")
+#Number1 = (input("enter your first number "))
+#Number2 = (input("Enter your second number "))
+#print("NOW Your First number is " + Number2)
+#print("And NOW Your Second number " + Number1)
+
+#2. Calcualte Rectange Dimension
+#print("Welcome Heres a Area of a Rectangle")
+#Width = float(input("enter your width "))
+#Length = float(input("enter your length "))
+#Area = (Length * Width)
+#print("Your Area is ",Area)
+
+#3.Temputure converter
+#print("welcome to celcius temperature converter")
+#Temp = float(input("What is your temperature in celcius"))
+#Fahrenheit = (Temp * 9/5 + 32)
+#print("Your Temperature in Fahrenheit is" , Fahrenheit)
+
+#4. Average Detecter
+#print("Enter 3 of your grades")
+#Grade1 = float(input("Enter your first grade: "))
+#Grade2 = float(input("Enter your second grade: "))
+#Grade3 = float(input("Enter your third grade: "))
+#average = (Grade1 + Grade2 + Grade3)/3
+#print("Your average is", average, "%")
+
+#5. Person details
+#print("Hello There")
+#age = (input("What is Your age"))
+#name =(input("What is your name"))
+#Lastname =(input("What is your last name"))
+#print("Hello " + name + " " + Lastname + " You are " + age + " years old")
+
+#6. Arithmetic Operations
+##Teachers note: I Got Bored and I made it alitte extra complex
+#print("Welcome to the Arithmetic Calculator!")
+#a = int(input("Enter the first number: "))
+#b = int(input("Enter the second number: "))
+#print("Enter the operation (+, -, *, /, %):")
+#Output = input()
+#if Output == "+":
+#    print("The Sum is", a + b)
+#elif Output == "-":
+#    print("The Subtraction is", a - b)
+#elif Output == "/":
+#    print("The Division is", a / b)
+#elif Output == "*":
+#    print("The Multiplication is", a * b)
+
+#If You Still Want The Original for 6 Here it is
+
+#print("Welcome to Basic Arthimetics")
+#number1 = float(input("Enter first number: "))
+#number2 = float(input("Enter second number: "))
+#print(f"The Sum of {number1} and {number2} is: {number1 + number2}")
+#print(f"The Multiplication of {number1} and {number2} is: {number1 * number2}")
+#print(f"the Division of {number1} and {number2} is: {number1 / number2}")
+#print(f"the Subtraction of {number1} and {number2} is: {number1 - number2}")

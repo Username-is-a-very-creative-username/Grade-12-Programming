@@ -1,0 +1,92 @@
+print ("WELCOME to the ATM MACHINE, please enter your login ")
+
+user_account = {"balance": 1000, "pin": 1234}
+def authenticate_user():
+     
+     
+    attempts = 0
+    max_attempts = 3
+    while attempts < max_attempts:
+        try:
+            entered_pin = int(input("Enter your PIN: "))
+            if entered_pin == user_account["pin"]:
+                print("Authentication successful.")
+                return True
+            else:
+                print("Incorrect PIN. Please try again.")
+                attempts += 1
+        except ValueError:
+            print("Invalid input. Please enter a Numbered PIN.")
+            attempts += 1
+    print("Too Many incorrect PIN attempts entered. ACCESS DENIED.")
+    return False
+def check_balance():
+     
+    print(f"Your current balance is: ${user_account['balance']}")
+def deposit_money():
+     
+    while True:
+        try:
+            deposit_amount = float(input("Enter amount to deposit: $"))
+            if deposit_amount > 0:
+                user_account["balance"] += deposit_amount
+                print(f"Deposit successful. New balance: ${user_account['balance']}")
+                break
+            else:
+                print("Invalid deposit amount. Please enter a positive value.")
+        except ValueError:
+            print("Invalid input. Please enter a numeric value.")
+def withdraw_money():
+     
+    while True:
+        try:
+            withdrawal_amount = float(input("Enter amount to withdraw: $"))
+            if withdrawal_amount > 0 and withdrawal_amount <= user_account["balance"]:
+                user_account["balance"] -= withdrawal_amount
+                print(f"Withdrawal successful. New balance: ${user_account['balance']}")
+                break
+            elif withdrawal_amount > user_account["balance"]:
+                print("Insufficient funds.")
+            else:
+                print("Invalid withdrawal amount. Please enter a positive value.")
+        except ValueError:
+            print("Invalid input. Please enter a numeric value.")
+def change_pin():
+    
+    while True:
+        try:
+            new_pin = int(input("Enter your new PIN (4 digits): "))
+            if len(str(new_pin)) == 4:
+                user_account["pin"] = new_pin
+                print("PIN changed successfully.")
+                break
+            else:
+                print("Invalid PIN. Please enter a 4-digit number.")
+        except ValueError:
+            print("Invalid input. Please enter a numeric value.")
+def atm_menu():
+    
+    if authenticate_user():
+        
+        while True:
+            print("\nSelect an option:")
+            print("1. Check Balance")
+            print("2. Deposit Money (+)")
+            print("3. Withdraw Money (-)")
+            print("4. Change PIN")
+            print("5. Exit")
+            choice = input("Enter your choice (1-5): ")
+            if choice == '1':
+                check_balance()
+            elif choice == '2':
+                deposit_money()
+            elif choice == '3':
+                withdraw_money()
+            elif choice == '4':
+                change_pin()
+            elif choice == '5':
+                print("Thank you for using the ATM. Have a Nice Day!")
+                break
+            else:
+                print("INVALID. Please try again.")
+atm_menu()

@@ -1,0 +1,190 @@
+from datetime import datetime
+
+# Book class to store book details
+class Book:
+    def __init__(self, title, author, isbn):
+        self.title = title
+        self.author = author
+        self.isbn = isbn
+        self.is_available = True
+
+    def __str__(self):
+        return f"title: {self.title}, author: {self.author}, isbn: {self.isbn}, Available: {'Yes' if self.is_available else 'No'}"
+
+# Borrower class to store borrower details
+class Borrower:
+    def __init__(self, borrower_id, book_borrowed, borrow_date, return_date=None):
+        self.borrower_id = borrower_id
+        self.book_borrowed = book_borrowed
+        self.borrow_date = borrow_date
+        self.return_date = return_date
+
+    def __str__(self):
+        return f"Borrower ID: {self.borrower_id}, Book Borrowed: {self.book_borrowed}, Borrow Date: {self.borrow_date.strftime('%Y-%m-%d')}, Return Date: {self.return_date.strftime('%Y-%m-%d') if self.return_date else 'Not Returned'}"
+
+# LibraryManager class to manage the library system
+class LibraryManager:
+    def __init__(self):
+        self.books = []
+        self.borrowed_books = {}
+
+    # Add a book to the library
+    def add_book(self, title, author, isbn):
+        book = Book(title, author, isbn)
+        self.books.append(book)
+        print("Book added successfully!")
+
+    # Remove a book from the library
+    def remove_book(self, isbn):
+        for book in self.books:
+            if book.isbn == isbn:
+                self.books.remove(book)
+                print("Book removed successfully!")
+                return
+
+        print("Book not found!")
+
+    # Update book details in the library
+    def update_book(self, isbn, title=None, author=None):
+        for book in self.books:
+            if book.isbn == isbn:
+                if title:
+                    book.title = title
+                if author:
+                    book.author = author
+                print("Book updated successfully!")
+                return
+
+        print("Book not found!")
+
+    # Search for a book by title, author, or ISBN
+    def search_book(self, query):
+        found_books = []
+        for book in self.books:
+            if query.lower() in book.title.lower() or query.lower() in book.author.lower() or query.lower() in book.isbn:
+                found_books.append(book)
+
+        if found_books:
+            print("Found books:")
+            for book in found_books:
+                print(book)
+        else:
+            print("No books found matching the query.")
+
+    # Allows the User to borrow
+    def borrow_book(self, isbn, borrower_id):
+        for book in self.books:
+            if book.isbn == isbn and book.is_available:
+                book.is_available = False
+                borrow_date = datetime.now()
+                borrower = Borrower(borrower_id, book, borrow_date)
+                self.borrowed_books[borrower_id] = borrower
+                print("Book borrowed successfully!")
+                return
+
+        print("Book not found or unavailable.")
+
+    # Allows the User to Return
+    def return_book(self, isbn, borrower_id):
+        if borrower_id in self.borrowed_books:
+            borrower = self.borrowed_books[borrower_id]
+            if borrower.book_borrowed.isbn == isbn:
+                borrower.return_date = datetime.now()
+                borrower.book_borrowed.is_available = True
+                print("Book returned successfully!")
+                return
+
+        print("Borrower not found or no book borrowed with this ISBN.")
+
+    
+    def calculate_late_fee(self, borrow_date, return_date):
+       
+        pass
+
+    # Save library data to a file
+    def save_data(self, filename):
+        with open(filename, "w") as f:
+            for book in self.books:
+                f.write(f"{book.title},{book.author},{book.isbn},{book.is_available}\n")
+
+            for borrower_id, borrower in self.borrowed_books.items():
+                f.write(f"{borrower_id},{borrower.book_borrowed.isbn},{borrower.borrow_date.strftime('%Y-%m-%d')},{borrower.return_date.strftime('%Y-%m-%d') if borrower.return_date else ''}\n")
+
+    # Load library data from a file
+    def load_data(self, filename):
+        self.books = []
+        self.borrowed_books = {}
+        with open(filename, "r") as f:
+            for line in f:
+                parts = line.strip().split(",")
+                if len(parts) == 4:  # Book data
+                    title, author, isbn, is_available = parts
+                    book = Book(title, author, isbn)
+                    book.is_available = is_available == 'True'
+                    self.books.append(book)
+                elif len(parts) == 5:  # Borrower data
+                    borrower_id, isbn, borrow_date, return_date = parts
+                    borrow_date = datetime.strptime(borrow_date, '%Y-%m-%d')
+                    if return_date:
+                        return_date = datetime.strptime(return_date, '%Y-%m-%d')
+                    book = next((b for b in self.books if b.isbn == isbn), None)
+                    if book:
+                        borrower = Borrower(borrower_id, book, borrow_date, return_date)
+                        self.borrowed_books[borrower_id] = borrower
+
+# Example usage
+if __name__ == "__main__":
+    library = LibraryManager()
+
+    # Load data if a file exists
+    try:
+        library.load_data("library_data.txt")
+        print("Data loaded from file!")
+    except FileNotFoundError:
+        print("No data file found. Starting with an empty library.")
+
+    library.add_book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "978-0345391803")
+    library.add_book("Pride and Prejudice", "Jane Austen", "978-0141439518")
+
+    while True:
+        print("\nLibrary Management System:")
+        print("1. Add Book")
+        print("2. Remove Book")
+        print("3. Update Book")
+        print("4. Search Book")
+        print("5. Borrow Book")
+        print("6. Return Book")
+        print("7. Save Data")
+        print("8. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            title = input("Enter book title: ")
+            author = input("Enter book author: ")
+            isbn = input("Enter book ISBN: ")
+            library.add_book(title, author, isbn)
+        elif choice == '2':
+            isbn = input("Enter ISBN of book to remove: ")
+            library.remove_book(isbn)
+        elif choice == '3':
+            isbn = input("Enter ISBN of book to update: ")
+            title = input("Enter new title (leave blank if unchanged): ")
+            author = input("Enter new author (leave blank if unchanged): ")
+            library.update_book(isbn, title, author)
+        elif choice == '4':
+            query = input("Enter search query (title, author, or ISBN): ")
+            library.search_book(query)
+        elif choice == '5':
+            isbn = input("Enter ISBN of book to borrow: ")
+            borrower_id = input("Enter your borrower ID: ")
+            library.borrow_book(isbn, borrower_id)
+        elif choice == '6':
+            isbn = input("Enter ISBN of book to return: ")
+            borrower_id = input("Enter your borrower ID: ")
+            library.return_book(isbn, borrower_id)
+        elif choice == '7':
+            break
+        else:
+            print("Invalid choice!")
+

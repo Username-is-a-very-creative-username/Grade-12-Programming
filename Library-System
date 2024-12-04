@@ -34,7 +34,7 @@ class LibraryManager:
         self.books.append(book)
         print("Book added successfully!")
 
-    # Remove a book from the library
+    
     def remove_book(self, isbn):
         for book in self.books:
             if book.isbn == isbn:
@@ -44,7 +44,7 @@ class LibraryManager:
 
         print("Book not found!")
 
-    # Update book details in the library
+    # Update book details in the library section
     def update_book(self, isbn, title=None, author=None):
         for book in self.books:
             if book.isbn == isbn:
@@ -132,11 +132,11 @@ class LibraryManager:
                         borrower = Borrower(borrower_id, book, borrow_date, return_date)
                         self.borrowed_books[borrower_id] = borrower
 
-# Example usage
+
 if __name__ == "__main__":
     library = LibraryManager()
 
-    # Load data if a file exists
+   
     try:
         library.load_data("library_data.txt")
         print("Data loaded from file!")

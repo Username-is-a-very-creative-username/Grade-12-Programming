@@ -1,0 +1,113 @@
+# Stores Product
+inventory = [
+    {"id": 1, "name": "Xbox", "price": 499.99},
+    {"id": 2, "name": "iPhone 16 Pro Max", "price": 1199.99},
+    {"id": 3, "name": "DISCO", "price": 35.50},
+    {"id": 4, "name": "4090", "price": 1999.99},
+    {"id": 5, "name": "Jamaican Oxtail Cellphone", "price": 420.69}
+]
+
+# Class that will hold the selected products
+cart = []
+
+
+
+# Displays the prodcut to user
+def display_store_items():
+    print("Available products:")
+    for product in inventory:
+        print(f"ID: {product['id']}, Name: {product['name']}, Price: ${product['price']}")
+
+def add_to_cart():
+    product_id = int(input("Enter product ID to add to cart: "))
+    quantity = int(input("Enter quantity: "))
+    
+    for product in inventory:
+        if product['id'] == product_id:
+            for item in cart:
+                if item['id'] == product_id:
+                    item['quantity'] += quantity
+                    break
+            else:
+                cart.append({"id": product_id, "name": product['name'], "price": product['price'], "quantity": quantity})
+            print(f"Added {quantity} of {product['name']} to cart.")
+            break
+    else:
+        print("Product does not exist, Please try AGAIN.")
+
+# View User Cart
+def view_cart():
+    if not cart:
+        print("Your cart is empty.")
+    else:
+        total = 0
+        print("Your cart:")
+        for item in cart:
+            item_total = item['quantity'] * item['price']
+            print(f"Name: {item['name']}, Quantity: {item['quantity']}, Total: ${item_total}")
+            total += item_total
+        print(f"Overall total: ${total}")
+
+# Gives the user the ability to remove items from the cart
+def remove_from_cart():
+    product_id = int(input("Enter product ID to remove from cart: "))
+    for item in cart:
+        if item['id'] == product_id:
+            cart.remove(item)
+            print(f"Removed {item['name']} from cart.")
+            break
+    else:
+        print("Product not found in cart.")
+
+# Register if the users pruchase is valid or not
+def complete_purchase():
+    if not cart:
+        print("Your cart is empty.")
+        return
+    total = sum(item['quantity'] * item['price'] for item in cart)
+    print(f"Your total is ${total}. Do you want to complete the purchase? (yes/no)")
+    decision = input().lower()
+    if decision == 'yes':
+        print("Purchase successful!")
+    else:
+        print("Purchase canceled.")
+        
+# the Menu display to the user
+def menu():
+    while True:
+        print("\nMenu:") #Visibly demonstrates the user that this is a menu screen
+        print("1. View available products") #product Viewer
+        print("2. Add items to the cart") #Informs Viewer about adding items
+        print("3. View the cart") #Allows the viewer to visually see through input
+        print("4. Remove items from the cart") #allows the viewer to remove by input
+        print("5. Complete the purchase") #
+        print("6. Exit") #Allows the user to exit the program by inputting "6"
+        
+        choice = input("Choose an option: ")
+        if choice == '1':
+            display_store_items()
+        elif choice == '2':
+            add_to_cart()
+        elif choice == '3':
+            view_cart()
+        elif choice == '4':
+            remove_from_cart()
+        elif choice == '5':
+            complete_purchase()
+        elif choice == '6':
+            print("Thank you for attending, GOODBYE.")
+            break
+        else:
+            print("INVALID, Try again")
+
+# Password and username system
+def authenticate_user():
+    username = input("Enter username: ")
+    password = input("Enter password: ")
+    
+    if username == 'user' and password == 'password':
+        print("Login successful!")
+        menu()
+    else:
+        print("Invalid username or password.")
+authenticate_user()

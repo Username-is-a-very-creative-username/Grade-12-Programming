@@ -105,7 +105,7 @@ def authenticate_user():
     username = input("Enter username: ")
     password = input("Enter password: ")
     
-    if username == 'user' and password == 'password':
+    if username == 'allwood' and password == 'jamaica123':
         print("Login successful!")
         menu()
     else:

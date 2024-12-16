@@ -1,0 +1,14 @@
+string = input("Enter a word to get its vowels counted ") #Lets the user know to enter the correct syntax
+vowels = "aeiou"
+CapitalVowels = "AEIOU" #initalizes all of the Vowel Values to get added 
+vowelCount = 0
+CapitalVowelsCount = 0
+
+for char in string:
+  if char in vowels: #Adds any of the designated vowels to the list 
+    vowelCount += 1
+  if char in CapitalVowels:
+    CapitalVowelsCount += 1 #Adds any of the designated Capital vowels to the list 
+    
+print("Number of vowels:", vowelCount) #Shows the vowel count to the user
+print("Number of capital vowels:", CapitalVowelsCount) #shows the Capital Vowel count to the suer

@@ -1,0 +1,13 @@
+numbers = input("Enter numbers separated by spaces to find the missing number "
+                ).split()  #informs the user to enter the appropiate syntax
+numbers = [int(x) for x in numbers]
+
+n = len(numbers) + 1
+expected_sum = n * (n + 1) // 2  # sum of all numbers from 1 to n
+
+actual_sum = sum(
+    numbers)  # sum of all numbers in the list to find the missing number
+missing_number = expected_sum - actual_sum
+
+print(f"The missing number from the input is: {missing_number}"
+      )  #infroms the user what the missing number is 

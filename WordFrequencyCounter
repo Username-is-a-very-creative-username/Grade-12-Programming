@@ -1,0 +1,13 @@
+sentence = input("Enter a sentence to get its words counted: ") #informs the user to enter correct input and allwos input from the user
+words = sentence.split() #splits the sentence into words
+word_frequencies = {} #Dictonary for the syntax is createed
+
+for word in words: 
+  if word in word_frequencies:
+    word_frequencies[word] += 1 #Adds the amount of words to the dictonary
+  else:
+    word_frequencies[word] = 1 #If the word is not in it, adds a new layer
+
+print("WORD FREQUENCIES LISTED FROM SENTENCE") #informs the user that the list of words is being printed
+for word, frequency in word_frequencies.items(): 
+  print(f"{word} is said {frequency} times") #prints the amount of times each word is said

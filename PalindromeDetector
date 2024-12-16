@@ -1,0 +1,11 @@
+def is_palindrome(text): #defines the function for the palidrome
+  
+  text = text.lower().replace(" ", "")
+  return text == text[::-1] # Checks to see if the text repeats the same results backwards 
+PotentialPalindrome = input("Enter a string to see if it is a palidrome or not: ") #informs the user to enter an accurate input 
+
+if is_palindrome(PotentialPalindrome):
+  print("Your string is a palindrome")  #informs the user that the palindome is true
+  
+else:
+  print("Your string is not a palindrome") #informs the user that the palindrome is false

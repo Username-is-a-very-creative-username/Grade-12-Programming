@@ -1,0 +1,18 @@
+def is_prime(number): #defines the function is_prime
+ 
+  if number <= 1: #since 1 is only a single digit it is not prime
+    
+    return False
+  for i in range(2, int(number**0.5) + 1): # Loop through all numbers from 2 to the square root of the number to see if it is even or prime
+    if number % i == 0:
+      
+      return False
+  return True
+  
+number = int(input("Enter a number to see if it is a prime number ")) #infroms the user to enter the correct syntax for the code
+
+if is_prime(number):
+  print(f"{number} is a prime number.") #informs the user that their input is prime (true)
+
+else:
+  print(f"{number} is not a prime number.")#informs the user that their input is not a prime (False)
